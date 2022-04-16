@@ -11,7 +11,7 @@ try:
     random.seed(seedinput)
 except:
     random.seed()
-islandcount = randrange(10,50)
+islandcount = randrange(50,75)
 worldseed = randrange(-99999999,99999999)
 heightseed = randrange(-99999999,99999999)
 noise = PerlinNoise(octaves=2, seed=int(seedinput))
@@ -27,13 +27,21 @@ def tree(x,y,z,biome):
         mc.setBlocks(x,y,z,x,y+treeheight,z,17)
     if biome == "desert":
         mc.setBlocks(x,y,z,x,y+treeheight,z,81)
+    if biome == "taiga":
+        mc.setBlocks(x-1,y+treeheight,z-1,x+1,y+treeheight+5,z+1,18,1)
+        mc.setBlocks(x-2,y+treeheight-1,z-2,x+2,y+treeheight,z+2,18,1)
+        mc.setBlocks(x,y,z,x,y+treeheight*2,z,17,1)
+        
 def oregen(x,y,z,var):
-    height = randrange(1,2)
+    height = randrange(0,3)
+    
     if var == 1:
         mc.setBlocks(x,y,z,x,y-height,z,16)
         #print("gen ore")
     if var == 2:
         mc.setBlocks(x,y,z,x,y-height,z,15)
+    if var == -4:
+        mc.setBlocks(x,y,z,x,y-height/2,z,56)
 def genisland(x,z,size,height):
     freq=24
     amp = 10
@@ -77,6 +85,17 @@ def genisland(x,z,size,height):
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,1)
                 #grass
                 mc.setBlock(finalx,y1,finalz,1)
+            elif heightblock == -2:
+                #stone
+                mc.setBlocks(finalx,y1,finalz,finalx,height,finalz,1)
+                #dirt
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,1)
+                #grass
+                mc.setBlock(finalx,y1,finalz,80)
+                if plants == 8:
+                    tree(finalx,y1+1,finalz,"taiga")
+               
+                
             else:
                 #tree/plants
                 
@@ -90,10 +109,10 @@ def genisland(x,z,size,height):
                 mc.setBlock(finalx,y1,finalz,2)
                 if plants == 2:
                     tree(finalx,y1+1,finalz,"plains")
-                #elif plants >=40:
-                 #   mc.setBlock(finalx,y1+1,finalz,37)
-                #elif plants >=20:
-                 #   mc.setBlock(finalx,y1+1,finalz,38)
+                elif plants >=40:
+                    mc.setBlock(finalx,y1+1,finalz,37)
+                elif plants >=20:
+                    mc.setBlock(finalx,y1+1,finalz,38)
             oregen(finalx,y1+height+3,finalz,ore)
 genisland(0,0,8,-15)
 #tree(0,0,0,"plains")
