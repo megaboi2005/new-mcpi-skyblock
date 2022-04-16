@@ -7,9 +7,10 @@ Rewrite of my original skyblock that aims to fix bugs and make gameplay smoother
 - trees 
 - 3 biomes!!!
 - and much more coming soon
+- ores
 
 ## plans
 - All the original biomes
 - all the plants
-- ores
 - structures 👀
+- a way to "beat" the game
