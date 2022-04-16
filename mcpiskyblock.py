@@ -60,16 +60,16 @@ def genisland(x,z,size,height):
             plants = round(plantsmap([finalx/freq,finalz/freq])*100)
             #print(heightblock)
             
-            if heightblock == 1:
+            if heightblock == 1: # gravel patches
                 #dirt
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,13)
                 #stone
-                mc.setBlocks(finalx,y1,finalz,finalx,height,finalz,1)
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height-5,finalz,1)
                 
                 
-            elif heightblock ==-1:
+            elif heightblock ==-1: #desert
                 #stone
-                mc.setBlocks(finalx,y1,finalz,finalx,y1+height,finalz,1)
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height-5,finalz,1)
                 #sand
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,12)
                 
@@ -78,31 +78,30 @@ def genisland(x,z,size,height):
                     time.sleep(.3)
                     tree(finalx,y1+1,finalz,"desert")
                 
-            elif heightblock == 2:
+            elif heightblock == 2: #mountains
                 #stone
-                mc.setBlocks(finalx,y1,finalz,finalx,height,finalz,1)
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height-5,finalz,1)
                 #dirt
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,1)
                 #grass
                 mc.setBlock(finalx,y1,finalz,1)
-            elif heightblock == -2:
+            elif heightblock == -2: #taiga
+                if ore >=1:
+                    mc.setBlock(finalx,y1+1,finalz,78)
                 #stone
-                mc.setBlocks(finalx,y1,finalz,finalx,height,finalz,1)
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height-5,finalz,1)
                 #dirt
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,1)
                 #grass
                 mc.setBlock(finalx,y1,finalz,80)
                 if plants == 8:
                     tree(finalx,y1+1,finalz,"taiga")
-               
+
                 
-            else:
+            else: #plains
                 #tree/plants
-                
-                    
-                
                 #stone
-                mc.setBlocks(finalx,y1,finalz,finalx,y1+height,finalz,1)
+                mc.setBlocks(finalx,y1,finalz,finalx,y1+height-5,finalz,1)
                 #dirt
                 mc.setBlocks(finalx,y1,finalz,finalx,y1+height/8,finalz,3)
                 #grass
@@ -113,7 +112,8 @@ def genisland(x,z,size,height):
                     mc.setBlock(finalx,y1+1,finalz,37)
                 elif plants >=20:
                     mc.setBlock(finalx,y1+1,finalz,38)
-            oregen(finalx,y1+height+3,finalz,ore)
+
+            oregen(finalx,y1+height+randrange(-5,7),finalz,ore)
 genisland(0,0,8,-15)
 #tree(0,0,0,"plains")
 for a in range(islandcount):
