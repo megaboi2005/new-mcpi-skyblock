@@ -28,9 +28,27 @@ def tree(x,y,z,biome):
     if biome == "desert":
         mc.setBlocks(x,y,z,x,y+treeheight,z,81)
     if biome == "taiga":
-        mc.setBlocks(x-1,y+treeheight,z-1,x+1,y+treeheight+5,z+1,18,1)
-        mc.setBlocks(x-2,y+treeheight-1,z-2,x+2,y+treeheight,z+2,18,1)
-        mc.setBlocks(x,y,z,x,y+treeheight*2,z,17,1)
+        taigaheight = treeheight*2
+        #tippy top
+        mc.setBlock(x,y+taigaheight+1,z,18,1)
+        #topshort
+        mc.setBlocks(x-1,y+taigaheight,z,x+1,y+taigaheight,z,18,1)
+        mc.setBlocks(x,y+taigaheight,z+1,x,y+taigaheight,z-1,18,1)
+        #middleshort
+        mc.setBlocks(x-1,y+taigaheight-2,z,x+1,y+taigaheight-2,z,18,1)
+        mc.setBlocks(x,y+taigaheight-2,z+1,x,y+taigaheight-2,z-1,18,1)
+        #bottomshort
+        mc.setBlocks(x-1,y+taigaheight-4,z,x+1,y+taigaheight-4,z,18,1)
+        mc.setBlocks(x,y+taigaheight-4,z+1,x,y+taigaheight-4,z-1,18,1)
+        #topbig
+        mc.setBlocks(x-2,y+taigaheight-3,z+1,x+2,y+taigaheight-3,z-1,18,1)
+        mc.setBlocks(x+1,y+taigaheight-3,z+2,x-1,y+taigaheight-3,z-2,18,1)   
+        #bottombig
+        mc.setBlocks(x-2,y+taigaheight-5,z+1,x+2,y+taigaheight-5,z-1,18,1)
+        mc.setBlocks(x+1,y+taigaheight-5,z+2,x-1,y+taigaheight-5,z-2,18,1)                    
+        #mc.setBlocks(x-1,y+treeheight,z-1,x+1,y+treeheight+5,z+1,18,1)
+        #mc.setBlocks(x-2,y+treeheight-1,z-2,x+2,y+treeheight,z+2,18,1)
+        mc.setBlocks(x,y,z,x,y+taigaheight,z,17,1)
         
 def oregen(x,y,z,var):
     height = randrange(0,3)
