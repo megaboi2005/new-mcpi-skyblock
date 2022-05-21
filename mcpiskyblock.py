@@ -18,15 +18,17 @@ except:
 try:
     mc = Minecraft.create()
 except ConnectionRefusedError:
-    warn("No mcpi process was found, start mcpi and open a world")
+    crit("No mcpi process was found, start mcpi and open a world")
     exit()
 
 mc.setBlocks(-256, -64, -256, 256, 128, 256, 0)
-seedinput = input('insert seed here (must be an integer): ')
+info("Type the seed")
+seedinput = input("")
 
 try:
     random.seed(seedinput)
 except:
+    warn("No seed given, generating a random one.")
     random.seed()
 islandcount = randrange(50,75)
 worldseed = randrange(-99999999,99999999)
@@ -71,7 +73,7 @@ def tree(x,y,z,biome):
         
 def oregen(x,y,z,var):
     height = randrange(0,3)
-    #print(var)
+    
     if var == 1:
         mc.setBlocks(x,y,z,x,y-height,z,16)
         #print("gen ore")
@@ -82,7 +84,7 @@ def oregen(x,y,z,var):
     if var == -4:
         mc.setBlocks(x,y,z,x,y-height/2,z,56)
     if var == 10:
-        mc.setBlocks(x,y,z,x,y-height,z,155)
+        mc.setBlocks(x,y,z,x,y-height,z,13)
 def genisland(x,z,size,height):
     freq=24
     amp = 10
@@ -180,7 +182,9 @@ def genisland(x,z,size,height):
 genisland(0,0,8,-15)
 #tree(0,0,0,"plains")
 for a in range(islandcount):
-    info(f'generated {a} out of {islandcount-1}')
+    finalcount = a / islandcount*100
+    info(f'generated {round(finalcount)}%')
     
     genisland(randrange(-128,128),randrange(-128,128),randrange(5,18),-7)
     time.sleep(.5)
+info(f'generated 100%')
